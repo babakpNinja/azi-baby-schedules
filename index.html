@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#5b6ee1">
+<title>Aydin & Ana, Daily Rhythms</title>
+<style>
+  :root{
+    --bg:#f6f7fb; --card:#ffffff; --ink:#1f2340; --muted:#6b7192;
+    --line:#e7e9f4; --brand:#5b6ee1; --brand2:#8a63e8;
+    --sleep:#6f7be8; --sleep-bg:#eef0fe;
+    --feed:#f0913e; --feed-bg:#fdf0e2;
+    --play:#28b487; --play-bg:#e4f6ef;
+    --learn:#e05b93; --learn-bg:#fce7f0;
+    --care:#3faad8; --care-bg:#e5f4fb;
+    --school:#9aa0ad; --school-bg:#f1f2f5;
+    --shadow:0 4px 18px rgba(38,42,90,.07);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.55}
+  header{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;text-align:center;
+    padding:24px 20px 20px}
+  header h1{margin:0 0 4px;font-size:1.5rem;letter-spacing:-.2px}
+  header p{margin:0;opacity:.94;font-size:.9rem;max-width:640px;margin-inline:auto}
+  .hero{display:block;width:100%;max-width:760px;margin:0 auto;height:auto}
+  .wrap{max-width:760px;margin:0 auto;padding:0 14px 60px}
+  /* tabs */
+  .tabs{position:sticky;top:0;z-index:20;display:flex;gap:8px;padding:12px 0;background:var(--bg)}
+  .tab{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;border:0;cursor:pointer;
+    font-size:.98rem;font-weight:650;padding:10px 8px;border-radius:16px;
+    background:#eceeffe6;color:var(--muted);transition:.18s;line-height:1.2}
+  .tab img{width:34px;height:34px;border-radius:50%;background:#fff;object-fit:cover}
+  .tab .lbl small{display:block;font-weight:500;font-size:.72rem;opacity:.8}
+  .tab.active{background:var(--brand);color:#fff;box-shadow:var(--shadow)}
+  .panel{display:none;animation:fade .35s ease}
+  .panel.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* child banner */
+  .who{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);
+    border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);margin:6px 0 16px}
+  .who img{width:66px;height:66px;border-radius:50%;object-fit:cover;flex:0 0 66px}
+  .who h2{margin:0;font-size:1.2rem}
+  .who p{margin:2px 0 0;font-size:.84rem;color:var(--muted)}
+  /* summary chips */
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+  .chip{flex:1 1 45%;background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:13px 14px;box-shadow:var(--shadow)}
+  .chip .k{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+  .chip .v{font-size:1.24rem;font-weight:750;margin-top:2px}
+  .chip .s{font-size:.77rem;color:var(--muted)}
+  h3.sec{font-size:1.05rem;margin:24px 4px 12px;display:flex;align-items:center;gap:9px}
+  h3.sec svg{width:22px;height:22px}
+  /* legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px 14px;margin:2px 4px 14px;font-size:.8rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend svg{width:16px;height:16px}
+  /* timeline */
+  .timeline{margin:0 2px}
+  .row{display:flex;gap:12px;align-items:stretch;margin-bottom:10px}
+  .time{flex:0 0 62px;font-weight:700;font-size:.85rem;padding-top:12px;color:var(--ink);text-align:right}
+  .time small{display:block;font-weight:500;color:var(--muted);font-size:.66rem}
+  .event{flex:1;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--brand);
+    border-radius:12px;padding:10px 12px;box-shadow:var(--shadow)}
+  .event .t{font-weight:680;font-size:.95rem;display:flex;align-items:center;gap:8px}
+  .event .t svg{width:19px;height:19px;flex:0 0 19px}
+  .event .d{font-size:.82rem;color:var(--muted);margin-top:3px}
+  .event.sleep{border-left-color:var(--sleep);background:var(--sleep-bg)}
+  .event.feed{border-left-color:var(--feed);background:var(--feed-bg)}
+  .event.play{border-left-color:var(--play);background:var(--play-bg)}
+  .event.learn{border-left-color:var(--learn);background:var(--learn-bg)}
+  .event.care{border-left-color:var(--care);background:var(--care-bg)}
+  .event.school{border-left-color:var(--school);background:var(--school-bg);opacity:.85}
+  .event.school .t,.event.school .d{color:#8b90a0}
+  .icn-sleep{color:var(--sleep)} .icn-feed{color:var(--feed)} .icn-play{color:var(--play)}
+  .icn-learn{color:var(--learn)} .icn-care{color:var(--care)} .icn-school{color:var(--school)}
+  .fixed-intro{font-size:.85rem;color:var(--muted);margin:2px 4px 12px}
+  .fixed-wrap{opacity:.92}
+  .plan-badge{display:inline-block;background:var(--play-bg);color:var(--play);font-size:.7rem;
+    font-weight:700;padding:3px 9px;border-radius:20px;margin-left:8px;vertical-align:middle;letter-spacing:.3px}
+  /* info cards */
+  .info{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px 16px;
+    box-shadow:var(--shadow);margin-bottom:12px}
+  .info h4{margin:0 0 8px;font-size:1rem}
+  .info ul{margin:0;padding-left:18px}
+  .info li{margin:5px 0;font-size:.9rem}
+  .info li b{font-weight:680}
+  .note{font-size:.83rem;color:var(--ink);background:var(--sleep-bg);border:1px solid #dfe3fb;
+    border-radius:14px;padding:12px 14px;margin:0 0 16px;display:flex;gap:10px}
+  .note svg{width:22px;height:22px;flex:0 0 22px;color:var(--sleep);margin-top:1px}
+  details.src{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:4px 16px;box-shadow:var(--shadow)}
+  details.src summary{cursor:pointer;font-weight:650;padding:11px 0;font-size:.92rem}
+  details.src ul{font-size:.8rem;color:var(--muted);padding-left:18px}
+  details.src a{color:var(--brand);word-break:break-word}
+  footer{text-align:center;color:var(--muted);font-size:.78rem;padding:22px 16px 40px}
+  .disc{max-width:600px;margin:14px auto 0;font-size:.76rem;color:var(--muted);
+    background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  @media(max-width:420px){
+    .time{flex-basis:54px;font-size:.79rem}
+    .chip{flex-basis:100%}
+    header h1{font-size:1.3rem}
+    .tab{font-size:.9rem}
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Aydin &amp; Ana 🌱</h1>
+  <p>Gentle, evidence-based daily rhythms balancing sleep, nutrition, and play-based learning, made just for your two.</p>
+</header>
+<img class="hero" src="img/hero.jpg" alt="Illustration of a baby boy and toddler girl playing together">
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tab active" data-p="aydin">
+      <img src="img/aydin.jpg" alt="Aydin"><span class="lbl">Aydin<small>7 months</small></span>
+    </button>
+    <button class="tab" data-p="ana">
+      <img src="img/ana.jpg" alt="Ana"><span class="lbl">Ana<small>Home day</small></span>
+    </button>
+    <button class="tab" data-p="ana-school">
+      <img src="img/ana.jpg" alt="Ana"><span class="lbl">Ana<small>School day</small></span>
+    </button>
+  </div>
+
+  <!-- ============ AYDIN, 7 MONTHS ============ -->
+  <section class="panel active" id="aydin">
+    <div class="who">
+      <img src="img/aydin.jpg" alt="Aydin">
+      <div><h2>Aydin's Day</h2><p>7 months · building on solids · 3 naps · ~16h sleep target</p></div>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><div class="k">Total sleep / 24h</div><div class="v">~16 hrs</div><div class="s">Top of AAP 12-16h range</div></div>
+      <div class="chip"><div class="k">Night sleep</div><div class="v">~11.5 hrs</div><div class="s">6:45 pm → 6:30 am</div></div>
+      <div class="chip"><div class="k">Naps</div><div class="v">3 naps</div><div class="s">~4.5 hrs · wake windows ~2-2.5h</div></div>
+      <div class="chip"><div class="k">Feeds</div><div class="v">4-5 milk</div><div class="s">24-32 oz + 3 solid meals</div></div>
+    </div>
+
+    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <div><b>Built for ~16 hours (top of the healthy range):</b> most growth hormone is released during deep sleep, and consolidated sleep drives the memory and rapid brain wiring of the first year. To reach ~16h we pair a ~11.5-hour night (early 6:45 pm bedtime) with <b>three solid naps</b> and shorter ~2-2.5h wake windows. 16h is the upper end of the AAP range — treat it as a target and always follow Aydin's own sleepy cues; a little less on any day is perfectly healthy.</div>
+    </div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Sample Day</h3>
+    <div class="legend" id="legend-aydin"></div>
+    <div class="timeline" id="tl-aydin"></div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" class="icn-feed" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 3H10L9 3z"/><path d="M8 6h8l-1 13a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2L8 6z"/></svg>Nutrition</h3>
+    <div class="info">
+      <h4>Milk still leads, solids are ramping up</h4>
+      <ul>
+        <li><b>Breast milk or formula:</b> 24-32 oz/day across 4-5 feeds. Milk stays the main source of nutrition until 12 months.</li>
+        <li><b>Solids, 2 to 3 meals a day:</b> Aydin is ready for more variety and texture, thicker purees, mashed foods, and soft finger foods (baby-led weaning is fine).</li>
+        <li><b>Iron and zinc are the priority nutrients</b> now that birth iron stores are running low. Offer an iron-rich food at every meal: iron-fortified cereal, well-cooked egg, pureed or shredded meat, lentils, beans, tofu.</li>
+        <li><b>Pair iron with vitamin C</b> (fruit or veg) to boost absorption for brain growth.</li>
+        <li><b>Allergens:</b> keep offering peanut, egg, and dairy in baby-safe forms, early and regularly, once tolerated.</li>
+        <li><b>Open cup:</b> a few sips of water with meals is enough at this age.</li>
+        <li><b>Avoid:</b> honey, cow's milk as a drink, added salt and sugar. Cut round or hard foods small and soft to prevent choking.</li>
+      </ul>
+    </div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" class="icn-play" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><rect x="8" y="3" width="8" height="8" rx="1.5"/></svg>Play &amp; Early Learning</h3>
+    <div class="info">
+      <h4>Learning happens through the senses</h4>
+      <ul>
+        <li><b>Sitting &amp; tummy time:</b> short daily sessions build the core and back strength for sitting steadily and crawling.</li>
+        <li><b>Sensory play:</b> safe textures, crinkle toys, silicone teethers, cool spoons. Mouthing is how babies explore.</li>
+        <li><b>Face-to-face talk &amp; song:</b> narrate, sing, and copy his babbles. This is the foundation of language.</li>
+        <li><b>Peekaboo &amp; mirror play:</b> supports object permanence and self-recognition.</li>
+        <li><b>Cause and effect:</b> rattles, drums, stacking cups to bang and drop.</li>
+        <li><b>Reading:</b> chunky board and touch-and-feel books, a few short sessions a day.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ ANA, 2 YEARS ============ -->
+  <section class="panel" id="ana">
+    <div class="who">
+      <img src="img/ana.jpg" alt="Ana">
+      <div><h2>Ana's Day (Home)</h2><p>2 years · non-school days · one nap, ~12 hours of sleep</p></div>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><div class="k">Total sleep / 24h</div><div class="v">~12 hrs</div><div class="s">Range 11-14h (AAP/AASM)</div></div>
+      <div class="chip"><div class="k">Night sleep</div><div class="v">~11 hrs</div><div class="s">Consistent bedtime</div></div>
+      <div class="chip"><div class="k">Nap</div><div class="v">1 nap</div><div class="s">~1.5 hrs midday</div></div>
+      <div class="chip"><div class="k">Meals</div><div class="v">3 + 2 snacks</div><div class="s">~2 cups whole milk</div></div>
+    </div>
+
+    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <div><b>Protecting the 12 hours:</b> a predictable bedtime routine plus one solid midday nap keeps Ana near 12 hours total, supporting height (deep-sleep growth hormone), mood, memory, and the language explosion typical at this age.</div>
+    </div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Sample Day</h3>
+    <div class="legend" id="legend-ana"></div>
+    <div class="timeline" id="tl-ana"></div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" class="icn-feed" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 3H10L9 3z"/><path d="M8 6h8l-1 13a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2L8 6z"/></svg>Nutrition</h3>
+    <div class="info">
+      <h4>Balanced plates, small portions</h4>
+      <ul>
+        <li><b>Structure:</b> 3 meals + 2 planned snacks at roughly the same times daily. A toddler portion is about a quarter of an adult's, roughly 1 tablespoon per food per year of age.</li>
+        <li><b>Every day, across the 5 groups:</b> fruits, vegetables, grains (half whole grain), protein (eggs, beans, chicken, fish, tofu), and dairy.</li>
+        <li><b>Milk:</b> about 2 cups (16 oz) whole milk a day. Too much milk crowds out iron-rich food and blunts appetite.</li>
+        <li><b>Iron + vitamin C together</b> (beans with tomato, meat with peppers) boosts absorption for brain growth.</li>
+        <li><b>Water</b> between meals; limit juice to 4 oz/day or less and skip sugary drinks.</li>
+        <li><b>Picky is normal:</b> keep offering new foods without pressure. You choose what and when, Ana decides how much.</li>
+        <li><b>Cut round foods</b> (grapes, hot dogs) lengthwise to prevent choking.</li>
+      </ul>
+    </div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" class="icn-learn" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5s2-1 4.5-1S12 5 12 5v14s-2-1-4.5-1S3 19 3 19V5z"/><path d="M12 5s2-1 4.5-1S21 5 21 5v14s-2-1-4.5-1S12 19 12 19"/></svg>Play-Based Learning</h3>
+    <div class="info">
+      <h4>Play is how toddlers learn</h4>
+      <ul>
+        <li><b>Language:</b> narrate the day, read together often, sing action songs. This is peak vocabulary-building age.</li>
+        <li><b>Fine motor:</b> stacking blocks, big-knob puzzles, crayons, playdough, pouring and scooping.</li>
+        <li><b>Gross motor:</b> outdoor time daily, running, climbing, balls, ride-on toys, dancing.</li>
+        <li><b>Pretend play:</b> toy kitchen, dolls, play phone, grows imagination and empathy.</li>
+        <li><b>Early concepts:</b> sort by color and shape, count steps, big vs small, simple matching.</li>
+        <li><b>Sensory &amp; art:</b> water play, sand, finger paint, gluing, for creativity and focus.</li>
+        <li><b>Screens:</b> AAP suggests limiting to a little high-quality co-viewing. Play and interaction beat screens for learning.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ ANA, SCHOOL DAY ============ -->
+  <section class="panel" id="ana-school">
+    <div class="who">
+      <img src="img/ana.jpg" alt="Ana">
+      <div><h2>Ana's Day (School)</h2><p>2 years · school days · target ~14 hours of sleep</p></div>
+    </div>
+
+    <div class="chips">
+      <div class="chip"><div class="k">Total sleep target</div><div class="v">~14 hrs</div><div class="s">Top of AAP 11-14h range</div></div>
+      <div class="chip"><div class="k">Night sleep</div><div class="v">~12 hrs</div><div class="s">7:00 pm → 6:45 am</div></div>
+      <div class="chip"><div class="k">School nap</div><div class="v">2 hrs</div><div class="s">1:00-3:00 pm · fixed</div></div>
+      <div class="chip"><div class="k">Bedtime</div><div class="v">6:45-7:00</div><div class="s">Early, to protect 14h</div></div>
+    </div>
+
+    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <div><b>The sleep math:</b> the school nap is a fixed 2 hours (1:00-3:00 pm), so to reach ~14 hours we build the night around it — a ~12-hour night (about 7:00 pm to 6:45 am). That means an <b>early, protected bedtime</b> is the single most important lever. If she resists 6:45-7:00, a 7:15-7:30 bedtime still lands ~13.5 hours.</div>
+    </div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>School's Own Schedule <span class="plan-badge" style="background:var(--school-bg);color:#8b90a0">fixed · set by school</span></h3>
+    <p class="fixed-intro">Shown in gray because this part is <b>run by the school &mdash; outside our control</b>. It's summarized here so the home routine below can be planned around it (especially the 1:00-3:00 pm nap).</p>
+    <div class="legend" id="legend-ana-fixed"></div>
+    <div class="timeline fixed-wrap" id="tl-ana-fixed"></div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" class="icn-play" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Proposed Rhythm for ~14h Sleep <span class="plan-badge">what we control</span></h3>
+    <p class="fixed-intro">The home hours (morning + evening) tuned around the fixed school day to hit the ~14-hour goal.</p>
+    <div class="legend" id="legend-ana-plan"></div>
+    <div class="timeline" id="tl-ana-plan"></div>
+
+    <div class="info">
+      <h4>How to protect the ~14 hours on school days</h4>
+      <ul>
+        <li><b>Guard the early bedtime</b> above everything else. Lost night sleep can't be made up by the fixed 2h nap, so start bath by 6:30 and lights out by 7:00.</li>
+        <li><b>Ask the school to keep her 1:00-3:00 nap consistent</b> — full 2 hours, same cot and routine. This is the anchor the whole plan rests on.</li>
+        <li><b>Wind down early:</b> dinner by ~5:45 and only calm play after pickup. Bright screens and rough-and-tumble before bed push bedtime later.</li>
+        <li><b>Hearty breakfast</b> — school snack isn't until 9:50 and lunch ~11:30, so a protein-rich breakfast at home carries her through the morning.</li>
+        <li><b>Watch for a nap that runs long or late:</b> if the 2h school nap ever pushes past 3:00, bedtime can slip — flag it with teachers.</li>
+        <li><b>If she drops the school nap</b> on any day, move bedtime earlier still (6:15-6:30) so total sleep stays near the goal.</li>
+      </ul>
+    </div>
+  </section>
+
+  <details class="src">
+    <summary>📚 Sources &amp; research notes</summary>
+    <ul>
+      <li>American Academy of Pediatrics / AASM sleep-duration guidance: infants 4-12 mo need 12-16h and toddlers 1-2 yr need 11-14h per 24h, including naps. <a href="https://www.healthychildren.org">HealthyChildren.org</a></li>
+      <li>7-month sleep norms: ~13-15h total, 2-3 naps, wake windows ~2.5-3.5h (pediatric sleep references).</li>
+      <li>Growth hormone is released mainly during deep (slow-wave) sleep, supporting children's physical growth.</li>
+      <li>"Infant sleep and its relation with cognition and growth" narrative review, sleep, brain development and growth.</li>
+      <li>CDC Infant &amp; Toddler Nutrition; USDA MyPlate; Nemours KidsHealth and Johns Hopkins, toddler portions and food groups.</li>
+      <li>Huckleberry &amp; BabyCenter 7-8 month feeding: 24-32 oz milk + solids 2-3 times a day, plus finger foods / baby-led weaning.</li>
+      <li>AAP guidance on introducing allergens early and prioritizing iron-rich first foods.</li>
+    </ul>
+  </details>
+
+  <div class="disc">⚠️ <b>General guidance, not medical advice.</b> Every child is different. These are flexible templates to adapt to Aydin and Ana's own cues and your pediatrician's advice. Follow hunger and sleepiness signs over the clock.</div>
+</div>
+
+<footer>Made with care by Ninja 🥷 · for Arezou &amp; family</footer>
+
+<script>
+  // ---------- custom inline SVG icons ----------
+  const ICON={
+    sleep:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+    feed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6l-1 3H10L9 3z"/><path d="M8 6h8l-1 13a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2L8 6z"/><path d="M9.5 11h5M9.5 14h5"/></svg>',
+    play:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><rect x="8" y="3" width="8" height="8" rx="1.5"/></svg>',
+    learn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5s2-1 4.5-1S12 5 12 5v14s-2-1-4.5-1S3 19 3 19V5z"/><path d="M12 5s2-1 4.5-1S21 5 21 5v14s-2-1-4.5-1S12 19 12 19"/></svg>',
+    care:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16M6 12V7a2 2 0 0 1 4 0M6 12l-1 4a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3l-1-4"/></svg>',
+    school:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-5 9 5-9 5-9-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg>'
+  };
+  const LABEL={sleep:"Sleep",feed:"Nutrition",play:"Play",learn:"Learn",care:"Care",school:"At school"};
+  const ic=t=>`<span class="icn-${t}">${ICON[t]}</span>`;
+
+  // ---------- schedule data ----------
+  const aydin=[
+    ["6:30","AM","feed","Wake + morning milk","Nurse or bottle to start the day (~11.5h night behind him)."],
+    ["7:15","AM","feed","Breakfast solids","Iron-rich meal: fortified cereal, egg, or soft fruit + a few sips of water."],
+    ["8:00","AM","play","Tummy time &amp; sitting play","Reach, roll, sit with support. Short ~2h wake window protects the extra sleep."],
+    ["8:30","AM","sleep","Nap 1 (~1.75h)","8:30-10:15. Dark, cool room; drowsy but awake."],
+    ["10:15","AM","feed","Milk feed","Full nurse or bottle after waking."],
+    ["10:45","AM","learn","Books &amp; talking","Board books, songs, copying his babbles."],
+    ["11:45","AM","feed","Lunch solids + milk","Veg or protein puree/finger food, then milk."],
+    ["12:15","PM","sleep","Nap 2 (~1.75h)","12:15-2:00. Same calm wind-down each nap."],
+    ["2:00","PM","feed","Milk feed","Rehydrate and refuel."],
+    ["2:30","PM","play","Sensory &amp; floor play","Textures, teethers, cause-and-effect toys, mirror."],
+    ["3:30","PM","sleep","Nap 3 (~1h)","3:30-4:30. A third nap keeps the day's sleep high without pushing bedtime late."],
+    ["4:30","PM","feed","Milk feed","Afternoon top-up."],
+    ["5:00","PM","play","Stroller walk / play","Fresh air; stacking cups and rattles to bang and drop."],
+    ["5:45","PM","feed","Dinner solids","Small iron-rich meal with the family."],
+    ["6:15","PM","care","Bath, massage &amp; book","Calm, dim lights signal that sleep is coming."],
+    ["6:45","PM","sleep","Bedtime milk + bed","Down for the night ~6:45. ~11.5h night; 1 feed only if needed. Naps ~4.5h + night ≈ 16h."]
+  ];
+  const ana=[
+    ["6:45","AM","care","Wake &amp; cuddle","Open curtains, slow start to the day."],
+    ["7:15","AM","feed","Breakfast","Whole grain + fruit + protein (egg or yogurt) + milk."],
+    ["8:00","AM","play","Free / independent play","Blocks, cars, dolls, child-led."],
+    ["8:45","AM","learn","Learning time","Books, colors &amp; shapes, simple puzzles, songs."],
+    ["9:30","AM","play","Outdoor active play","Run, climb, balls, gross motor + sunshine."],
+    ["10:15","AM","feed","Morning snack","Fruit + cheese or whole-grain crackers; water."],
+    ["10:45","AM","learn","Creative / sensory","Playdough, crayons, water or sand play."],
+    ["11:45","AM","feed","Lunch","Veg + protein + grain; iron food with vitamin C."],
+    ["12:30","PM","sleep","Nap (~1.5h)","Consistent midday nap protects the 12h total."],
+    ["2:00","PM","feed","Afternoon snack","After waking: fruit &amp; protein; milk or water."],
+    ["2:30","PM","play","Pretend &amp; building play","Kitchen, dress-up, stacking, imagination."],
+    ["3:15","PM","play","Park / outdoor time","Big-muscle play, ride-on toys, nature."],
+    ["4:15","PM","learn","Music &amp; movement","Dance, action songs, counting games."],
+    ["4:45","PM","play","Quiet free play","Wind the activity level down gently."],
+    ["5:30","PM","feed","Dinner","Family-style small portions; offer variety."],
+    ["6:15","PM","care","Family &amp; calm play","Puzzles, reading, connection time."],
+    ["6:45","PM","care","Bath &amp; pajamas","Start of the wind-down routine."],
+    ["7:15","PM","learn","Bedtime books","2-3 stories, dim lights, cuddles."],
+    ["7:45","PM","sleep","Bedtime","Lights out; ~11h night + 1.5h nap = ~12h total."]
+  ];
+  // School's own fixed schedule (summarized from the school's note) — grayed out, out of our control.
+  const anaFixed=[
+    ["8:45","AM","school","Arrival &amp; settle in","Drop-off and free play in the classroom before the structured day begins."],
+    ["9:50","AM","school","Snack, Circle Time &amp; Discovery","Wash hands and snack, then themed Discovery play. Circle Time with dancing, songs, puppets &amp; stories. Bathroom/diaper checks with teachers."],
+    ["11:00","AM","school","Outdoor Exploration Play","Outside in the Courtyard and Tree house."],
+    ["11:30","AM","school","Lunch (packed from home)","Wash hands, collect lunch, eat with teachers &amp; friends. No microwave — pack an ice pack or thermos. Stories while eating."],
+    ["12:10","PM","school","Stories &amp; finish lunch","Stories while everyone finishes; gather water bottle and home items in the courtyard."],
+    ["12:30","PM","school","Clean-up &amp; dismissal prep","Clean-up play 12:30-12:40, then wash hands in the tree-house/water-play area. (Half-day pickup ~12:45-1:00.)"],
+    ["1:00","PM","school","Nap / Rest Time","1:00-3:00 — rest on cots with books, music &amp; stories. This is the fixed nap the home plan is built around."],
+    ["3:15","PM","school","Afternoon snack (from home) &amp; Discovery","Snack from home, refill water bottles, wash hands, then begin classroom Discovery."],
+    ["3:45","PM","school","Discovery &amp; clean-up","3:45-4:30 classroom Discovery and clean-up; free play until ~5:00 pickup."]
+  ];
+  // Proposed home rhythm tuned around the fixed school day to reach ~14h total sleep.
+  const anaPlan=[
+    ["6:45","AM","care","Wake &amp; cuddle","Wake her by ~6:45 so an early bedtime works. Open curtains, dress, brush teeth."],
+    ["7:00","AM","feed","Hearty breakfast at home","Whole grain + fruit + protein (egg/yogurt) + milk — school snack isn't until 9:50."],
+    ["7:45","AM","play","Free play &amp; pack up","Calm play; pack bag, water bottle, ice-pack lunch + a from-home afternoon snack."],
+    ["8:20","AM","care","Drive to school","~15 min drive; songs and chatting on the way."],
+    ["8:45","AM","learn","Drop-off — school day begins","See the school's own schedule above. Warm, quick goodbye."],
+    ["1:00","PM","sleep","School nap · 1:00-3:00 (fixed)","The 2-hour school rest — the anchor of the whole plan. Ask staff to keep it full and consistent."],
+    ["5:00","PM","care","Pickup","Warm reunion; let her decompress and tell you about her day."],
+    ["5:15","PM","care","Home","Wash hands, quiet reconnection; a small light snack only if truly hungry."],
+    ["5:45","PM","feed","Early dinner","Serve early so bedtime stays early. Balanced small portions + water; keep it calm."],
+    ["6:15","PM","play","Quiet connection play","Low-key only: puzzles, blocks, reading — nothing stimulating before bed."],
+    ["6:30","PM","care","Bath &amp; pajamas","Warm bath + dim lights signal wind-down."],
+    ["6:45","PM","learn","2 short bedtime books","Cuddles, dim room, calm voices."],
+    ["7:00","PM","sleep","Lights out — target 6:45-7:00","~12h night + 2h school nap ≈ 14h total. If she fights it, 7:15-7:30 still lands ~13.5h."]
+  ];
+
+  function renderLegend(id,types){
+    types=types||["sleep","feed","play","learn","care"];
+    document.getElementById(id).innerHTML=
+      types.map(t=>`<span>${ic(t)}${LABEL[t]}</span>`).join("");
+  }
+  function render(id,data){
+    document.getElementById(id).innerHTML=data.map(r=>{
+      const [time,ap,type,title,desc]=r;
+      return `<div class="row">
+        <div class="time">${time}<small>${ap}</small></div>
+        <div class="event ${type}">
+          <div class="t">${ic(type)}${title}</div>
+          <div class="d">${desc}</div>
+        </div></div>`;
+    }).join("");
+  }
+  renderLegend("legend-aydin");renderLegend("legend-ana");
+  renderLegend("legend-ana-fixed",["school"]);renderLegend("legend-ana-plan");
+  render("tl-aydin",aydin);render("tl-ana",ana);
+  render("tl-ana-fixed",anaFixed);render("tl-ana-plan",anaPlan);
+  document.querySelectorAll(".tab").forEach(t=>{
+    t.addEventListener("click",()=>{
+      document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+      document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+      t.classList.add("active");
+      document.getElementById(t.dataset.p).classList.add("active");
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+  });
+</script>
+</body>
+</html>
