@@ -28,11 +28,14 @@
   .hero{display:block;width:100%;max-width:760px;margin:0 auto;height:auto}
   .wrap{max-width:760px;margin:0 auto;padding:0 14px 60px}
   /* tabs */
-  .tabs{position:sticky;top:0;z-index:20;display:flex;gap:8px;padding:12px 0;background:var(--bg)}
-  .tab{flex:1;display:flex;align-items:center;justify-content:center;gap:9px;border:0;cursor:pointer;
-    font-size:.98rem;font-weight:650;padding:10px 8px;border-radius:16px;
+  .tabs{position:sticky;top:0;z-index:20;display:flex;gap:8px;padding:12px 0;background:var(--bg);
+    overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:1 0 auto;display:flex;align-items:center;justify-content:center;gap:9px;border:0;cursor:pointer;
+    font-size:.95rem;font-weight:650;padding:10px 13px;border-radius:16px;white-space:nowrap;
     background:#eceeffe6;color:var(--muted);transition:.18s;line-height:1.2}
   .tab img{width:34px;height:34px;border-radius:50%;background:#fff;object-fit:cover}
+  .tab .emo{font-size:1.3rem;line-height:1;width:34px;text-align:center}
   .tab .lbl small{display:block;font-weight:500;font-size:.72rem;opacity:.8}
   .tab.active{background:var(--brand);color:#fff;box-shadow:var(--shadow)}
   .panel{display:none;animation:fade .35s ease}
@@ -98,6 +101,50 @@
   footer{text-align:center;color:var(--muted);font-size:.78rem;padding:22px 16px 40px}
   .disc{max-width:600px;margin:14px auto 0;font-size:.76rem;color:var(--muted);
     background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  /* places section */
+  .place-cat{margin:28px 4px 4px;font-size:1.05rem;font-weight:750;color:var(--ink);
+    display:flex;align-items:center;gap:9px}
+  .place-cat .em{font-size:1.25rem}
+  .place-sub{font-size:.82rem;color:var(--muted);margin:0 4px 12px}
+  .places{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .place{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);border-top:4px solid var(--play);overflow:hidden;
+    display:flex;flex-direction:column}
+  .place.p-park{border-top-color:var(--play)}
+  .place.p-nature{border-top-color:var(--care)}
+  .place.p-zoo{border-top-color:var(--learn)}
+  .place.p-museum{border-top-color:var(--brand2)}
+  .place.p-train{border-top-color:var(--brand)}
+  .place.p-beach{border-top-color:var(--sleep)}
+  .place.p-trip{border-top-color:var(--brand2)}
+  .place .ph{width:100%;height:132px;display:block;background:#eef0fe center/cover no-repeat}
+  .place .ph.fb{display:flex;align-items:center;justify-content:center;font-size:2.6rem}
+  .place .ph.fb.p-park{background:var(--play-bg)}
+  .place .ph.fb.p-nature{background:var(--care-bg)}
+  .place .ph.fb.p-zoo{background:var(--learn-bg)}
+  .place .ph.fb.p-museum{background:#efe8fd}
+  .place .ph.fb.p-train{background:var(--sleep-bg)}
+  .place .ph.fb.p-beach{background:var(--sleep-bg)}
+  .place .pb{padding:12px 13px;display:flex;flex-direction:column;flex:1}
+  .place h5{margin:0;font-size:.95rem;line-height:1.3}
+  .place .loc{font-size:.74rem;color:var(--brand);font-weight:650;margin:4px 0 5px}
+  .place .addr{font-size:.72rem;color:var(--muted);margin:0 0 7px;opacity:.85}
+  .place .why{font-size:.82rem;color:var(--muted);margin:0 0 9px}
+  .place .age{align-self:flex-start;font-size:.64rem;font-weight:700;text-transform:uppercase;
+    letter-spacing:.4px;color:var(--play);background:var(--play-bg);border-radius:20px;
+    padding:3px 9px;margin-bottom:10px;white-space:nowrap}
+  .place .plinks{display:flex;gap:6px;margin-top:auto}
+  .place .plinks a{font-size:.72rem;font-weight:700;text-decoration:none;padding:5px 12px;
+    border-radius:20px}
+  .place .plinks a.web{background:var(--brand);color:#fff}
+  .place .plinks a.map{background:#eef0fe;color:var(--brand)}
+  .place .pphoto{width:100%;height:132px;object-fit:cover;border-radius:9px;margin-bottom:9px;background:var(--line)}
+  .place .paddr{font-size:.74rem;color:var(--muted);margin:9px 0 0;line-height:1.35}
+  .place .plinks{display:flex;gap:8px;margin-top:9px}
+  .place .plinks a{font-size:.74rem;font-weight:650;color:var(--brand);text-decoration:none;
+    border:1px solid var(--line);border-radius:8px;padding:3px 11px;background:var(--bg)}
+  .place .plinks a:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+  @media(max-width:520px){.places{grid-template-columns:1fr}}
   @media(max-width:420px){
     .time{flex-basis:54px;font-size:.79rem}
     .chip{flex-basis:100%}
@@ -124,6 +171,12 @@
     <button class="tab" data-p="ana-school">
       <img src="img/ana.jpg" alt="Ana"><span class="lbl">Ana<small>(School)</small></span>
     </button>
+    <button class="tab" data-p="weekend">
+      <span class="emo" aria-hidden="true">🌳</span><span class="lbl">Weekend<small>Both home</small></span>
+    </button>
+    <button class="tab" data-p="places">
+      <span class="emo" aria-hidden="true">📍</span><span class="lbl">Places<small>50mi of home</small></span>
+    </button>
   </div>
 
   <!-- ============ AYDIN, 7 MONTHS ============ -->
@@ -141,7 +194,7 @@
     </div>
 
     <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <div><b>Built for ~16 hours (top of the healthy range):</b> most growth hormone is released during deep sleep, and consolidated sleep drives the memory and rapid brain wiring of the first year. To reach ~16h we pair a ~11.5-hour night (early 6:45 pm bedtime) with <b>three solid naps</b> and shorter ~2-2.5h wake windows. 16h is the upper end of the AAP range — treat it as a target and always follow Aydin's own sleepy cues; a little less on any day is perfectly healthy.</div>
+      <div><b>Built for ~16 hours (top of the healthy range):</b> most growth hormone is released during deep sleep, and consolidated sleep drives the memory and rapid brain wiring of the first year. To reach ~16h we pair a ~11.5-hour night (early 6:45 pm bedtime) with <b>three solid naps</b> and shorter ~2-2.5h wake windows. 16h is the upper end of the AAP range, treat it as a target and always follow Aydin's own sleepy cues; a little less on any day is perfectly healthy.</div>
     </div>
 
     <h3 class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Sample Day</h3>
@@ -191,7 +244,7 @@
     </div>
 
     <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <div><b>Building the 14 hours (minimum):</b> we treat 14h as the floor to protect on home days. The math is simple — a ~12-hour night (7:30 pm to 7:30 am) plus a solid ~2-hour midday nap. The consistent 7:30 pm bedtime is the key lever; deep sleep is when growth hormone peaks and the day's language and memory get locked in. Always follow Ana's own sleepy cues — a little less on any day is perfectly healthy.</div>
+      <div><b>Building the 14 hours (minimum):</b> we treat 14h as the floor to protect on home days. The math is simple, a ~12-hour night (7:30 pm to 7:30 am) plus a solid ~2-hour midday nap. The consistent 7:30 pm bedtime is the key lever; deep sleep is when growth hormone peaks and the day's language and memory get locked in. Always follow Ana's own sleepy cues, a little less on any day is perfectly healthy.</div>
     </div>
 
     <h3 class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Sample Day</h3>
@@ -242,7 +295,7 @@
     </div>
 
     <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      <div><b>The sleep math:</b> bedtime is <b>7:30 pm — the same as home days</b>. With the fixed 2-hour school nap (1:00-3:00 pm) and the school's fixed ~6:45 am wake, a 7:30 pm lights-out gives ~11.25h night + 2h nap ≈ <b>13.5 hours</b>. To reach a full 14h on school days you'd need either a slightly earlier bedtime (~7:00) or a later school start — so home days are where we protect the full 14h.</div>
+      <div><b>The sleep math:</b> bedtime is <b>7:30 pm, the same as home days</b>. With the fixed 2-hour school nap (1:00-3:00 pm) and the school's fixed ~6:45 am wake, a 7:30 pm lights-out gives ~11.25h night + 2h nap ≈ <b>13.5 hours</b>. To reach a full 14h on school days you'd need either a slightly earlier bedtime (~7:00) or a later school start, so home days are where we protect the full 14h.</div>
     </div>
 
     <h3 class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>School's Own Schedule <span class="plan-badge" style="background:var(--school-bg);color:#8b90a0">fixed · set by school</span></h3>
@@ -259,12 +312,132 @@
       <h4>How to protect sleep on school days</h4>
       <ul>
         <li><b>Guard the 7:30 pm bedtime</b> above everything else. Lost night sleep can't be made up by the fixed 2h nap, so start bath by 6:45 and lights out by 7:30.</li>
-        <li><b>Ask the school to keep her 1:00-3:00 nap consistent</b> — full 2 hours, same cot and routine. This is the anchor the whole plan rests on.</li>
+        <li><b>Ask the school to keep her 1:00-3:00 nap consistent</b>, full 2 hours, same cot and routine. This is the anchor the whole plan rests on.</li>
         <li><b>Wind down early:</b> dinner by ~5:45 and only calm play after pickup. Bright screens and rough-and-tumble before bed push bedtime later.</li>
-        <li><b>Hearty breakfast</b> — school snack isn't until 9:50 and lunch ~11:30, so a protein-rich breakfast at home carries her through the morning.</li>
-        <li><b>Watch for a nap that runs long or late:</b> if the 2h school nap ever pushes past 3:00, bedtime can slip — flag it with teachers.</li>
+        <li><b>Hearty breakfast</b>, school snack isn't until 9:50 and lunch ~11:30, so a protein-rich breakfast at home carries her through the morning.</li>
+        <li><b>Watch for a nap that runs long or late:</b> if the 2h school nap ever pushes past 3:00, bedtime can slip, flag it with teachers.</li>
         <li><b>If she drops the school nap</b> on any day, move bedtime earlier (6:30-7:00) so total sleep stays near the goal.</li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ============ WEEKEND (BOTH HOME) ============ -->
+  <section class="panel" id="weekend">
+    <div class="who">
+      <img src="img/hero.jpg" alt="Aydin and Ana together">
+      <div><h2>Weekend Rhythm</h2><p>Both kids home · mornings out, afternoons calm · naps and 7:30 pm bedtime still protected</p></div>
+    </div>
+
+    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <div><b>The weekend idea in one line:</b> get out of the house in the morning while both kids are fresh, then come home and protect the midday naps and the 7:30 pm bedtime. Those two anchors are what carry the whole family into an easy Monday. A packed day that skips naps usually costs you the next two.</div>
+    </div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Two rules that keep the weekend from unraveling</h3>
+    <div class="info">
+      <h4>Protect these and the rest is flexible</h4>
+      <ul>
+        <li><b>Guard the midday overlap (about 12:30 to 2:00).</b> This is the one stretch when both kids sleep at the same time. Aim to be home, or have Aydin down in the stroller, by then. That window is your reset, and it keeps the afternoon calm.</li>
+        <li><b>Keep bedtime sacred.</b> If a morning out ran long or a nap came up short, move bath and bed 15 to 30 minutes <b>earlier</b>, never later. Lost weekend sleep shows up as a rough Monday.</li>
+        <li><b>Nap on the go is allowed.</b> A 7-month-old can take the first nap in the carrier or stroller with no harm. Try to save the crib for at least one solid nap a day.</li>
+      </ul>
+    </div>
+
+    <h3 class="sec"><img src="img/aydin.jpg" alt="Aydin" style="width:24px;height:24px;border-radius:50%;object-fit:cover">Aydin's Weekend · 7 months</h3>
+    <p class="fixed-intro">Same sleep needs as any day (three naps, early bed). The morning nap can happen out and about; the midday nap is the one to bring home.</p>
+    <div class="legend" id="legend-wk-aydin"></div>
+    <div class="timeline" id="tl-wk-aydin"></div>
+
+    <h3 class="sec"><img src="img/ana.jpg" alt="Ana" style="width:24px;height:24px;border-radius:50%;object-fit:cover">Ana's Weekend · 2 years</h3>
+    <p class="fixed-intro">Morning is her big-muscle outing window. The 12:30 nap and 7:30 bedtime stay exactly where they are on home days.</p>
+    <div class="legend" id="legend-wk-ana"></div>
+    <div class="timeline" id="tl-wk-ana"></div>
+
+    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4"/></svg>
+      <div><b>The golden overlap:</b> from about 12:30 to 2:00 both kids are asleep. Aydin's second nap and Ana's midday nap line up. Protect it and you get a real break in the middle of every weekend day.</div>
+    </div>
+
+    <h3 class="sec"><svg viewBox="0 0 24 24" class="icn-play" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/><rect x="8" y="3" width="8" height="8" rx="1.5"/></svg>Taking them out: what actually works</h3>
+    <div class="info">
+      <h4>Field notes for a smooth outing with a baby and a toddler</h4>
+      <ul>
+        <li><b>Leave early.</b> Head out right after breakfast, around 8:30 to 9:00, so you are home before the midday nap.</li>
+        <li><b>One outing a day.</b> A single park or farm beats two rushed stops with two tired kids.</li>
+        <li><b>Beat the sun.</b> Before about 10:30 or after 3:30 keeps them out of the strongest midday sun. Sun hats on both.</li>
+        <li><b>Let Ana move.</b> She needs to run and climb, so pick places with open space and a playground.</li>
+        <li><b>Keep Aydin low-key.</b> A shaded blanket, safe things to mouth, and time watching his sister is plenty. Bring the carrier so he can nap on you.</li>
+        <li><b>Pack the basics:</b> diapers, wipes, water, a snack for Ana, a milk feed for Aydin, hats, and one spare outfit.</li>
+      </ul>
+    </div>
+    <p class="fixed-intro">Not sure where to go? The <b>📍 Places</b> tab has a long list of spots within 50 miles of home, sorted by type and tagged for their ages.</p>
+  </section>
+
+  <!-- ============ PLACES (50 MILES OF HOME) ============ -->
+  <section class="panel" id="places">
+    <div class="who">
+      <img src="img/hero.jpg" alt="Places to explore">
+      <div><h2>Places to Take the Kids</h2><p>Kid-friendly spots within ~50 miles of Los Altos (94024), picked for a 7-month-old and a 2-year-old. Each has an address, website, map link and a photo.</p></div>
+    </div>
+
+    <div class="note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      <div><b>How to read this:</b> distances are rough driving miles from Los Altos. The closest spots sit at the top of each group. Tags show who each place suits best. Call ahead or check the website for hours, and confirm anything with rides or animals is open the day you go.</div>
+    </div>
+
+    <div class="place-cat"><span class="em">🛝</span>Parks &amp; Playgrounds</div>
+    <p class="place-sub">Playgrounds and green space, good for a quick morning before nap.</p>
+    <div class="places">
+      <div class="place p-park"><img class="pphoto" src="img/places/redwood-grove-nature-preserve.jpg" alt="Redwood Grove Nature Preserve" loading="lazy"><h5>Redwood Grove Nature Preserve</h5><div class="loc">Los Altos · ~2 mi</div><p class="why">A pocket redwood forest with a short flat loop along a creek. A calm, stroller-easy walk minutes from home.</p><div class="paddr">📍 482 University Ave, Los Altos, CA 94022</div><div class="plinks"><a href="https://www.losaltosca.gov" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Redwood%20Grove%20Nature%20Preserve%20482%20University%20Ave%2C%20Los%20Altos%2C%20CA%2094022" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-park"><img class="pphoto" src="img/places/cuesta-park.jpg" alt="Cuesta Park" loading="lazy"><h5>Cuesta Park</h5><div class="loc">Mountain View · ~4 mi</div><p class="why">Big shady lawns and a fenced toddler playground, plus wide paved loops for a first scooter. Easy parking and clean restrooms make it a reliable morning stop.</p><div class="paddr">📍 615 Cuesta Dr, Mountain View, CA 94040</div><div class="plinks"><a href="https://www.mountainview.gov/our-city/departments/community-services/parks-and-trails/parks/city-parks" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Cuesta%20Park%20615%20Cuesta%20Dr%2C%20Mountain%20View%2C%20CA%2094040" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-park"><img class="pphoto" src="img/places/rengstorff-park.jpg" alt="Rengstorff Park" loading="lazy"><h5>Rengstorff Park</h5><div class="loc">Mountain View · ~4 mi</div><p class="why">A neighborhood park with a well-kept play structure and picnic tables. A summer splash pool sits nearby, and it stays flat and compact for an under-two.</p><div class="paddr">📍 201 S Rengstorff Ave, Mountain View, CA 94040</div><div class="plinks"><a href="https://www.mountainview.gov/our-city/departments/community-services/parks-and-trails/parks/city-parks" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Rengstorff%20Park%20201%20S%20Rengstorff%20Ave%2C%20Mountain%20View%2C%20CA%2094040" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-park"><img class="pphoto" src="img/places/magical-bridge-playground-mitchell-park.jpg" alt="Magical Bridge Playground (Mitchell Park)" loading="lazy"><h5>Magical Bridge Playground (Mitchell Park)</h5><div class="loc">Palo Alto · ~6 mi</div><p class="why">An all-abilities playground with toddler-safe swings and a gentle spinner. Fully fenced and shaded, with smooth paths for the stroller.</p><div class="paddr">📍 3700 Middlefield Rd, Palo Alto, CA 94303</div><div class="plinks"><a href="https://magicalbridge.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Magical%20Bridge%20Playground%20%28Mitchell%20Park%29%203700%20Middlefield%20Rd%2C%20Palo%20Alto%2C%20CA%2094303" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-park"><img class="pphoto" src="img/places/rinconada-park.jpg" alt="Rinconada Park" loading="lazy"><h5>Rinconada Park</h5><div class="loc">Palo Alto · ~7 mi</div><p class="why">Shady mature trees and a toddler play area, with the Junior Museum &amp; Zoo right next door. Easy to pair the two in one outing.</p><div class="paddr">📍 777 Embarcadero Rd, Palo Alto, CA 94301</div><div class="plinks"><a href="https://www.cityofpaloalto.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Rinconada%20Park%20777%20Embarcadero%20Rd%2C%20Palo%20Alto%2C%20CA%2094301" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-park"><img class="pphoto" src="img/places/ryder-park.jpg" alt="Ryder Park" loading="lazy"><h5>Ryder Park</h5><div class="loc">San Mateo · ~15 mi</div><p class="why">A bayfront 'castle park' with sand play and a water-play channel. Climbing mounds and breezy bay views round it out, so bring a change of clothes.</p><div class="paddr">📍 1801 J Hart Clinton Dr, San Mateo, CA 94401</div><div class="plinks"><a href="https://www.cityofsanmateo.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Ryder%20Park%201801%20J%20Hart%20Clinton%20Dr%2C%20San%20Mateo%2C%20CA%2094401" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+    </div>
+
+    <div class="place-cat"><span class="em">🌿</span>Nature &amp; Gardens</div>
+    <p class="place-sub">Stroller-friendly walks and open gardens. Fresh air and room to roam.</p>
+    <div class="places">
+      <div class="place p-nature"><img class="pphoto" src="img/places/rancho-san-antonio-deer-hollow-farm.jpg" alt="Rancho San Antonio &amp; Deer Hollow Farm" loading="lazy"><h5>Rancho San Antonio &amp; Deer Hollow Farm</h5><div class="loc">Cupertino · ~5 mi</div><p class="why">A flat wide path leads to Deer Hollow Farm and its cows and pigs. A local favorite on weekends, so arrive early before the lot fills.</p><div class="paddr">📍 22500 Cristo Rey Dr, Cupertino, CA 95014</div><div class="plinks"><a href="https://www.openspace.org/preserves/rancho-san-antonio" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Rancho%20San%20Antonio%20%26%20Deer%20Hollow%20Farm%2022500%20Cristo%20Rey%20Dr%2C%20Cupertino%2C%20CA%2095014" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-nature"><img class="pphoto" src="img/places/shoreline-lake-park.jpg" alt="Shoreline Lake &amp; Park" loading="lazy"><h5>Shoreline Lake &amp; Park</h5><div class="loc">Mountain View · ~5 mi</div><p class="why">Wide paved paths for scooters and strollers. Ducks and geese to watch. Kite-flying lawns and a cafe sit by the water, with boat rentals for later years.</p><div class="paddr">📍 3160 N Shoreline Blvd, Mountain View, CA 94043</div><div class="plinks"><a href="https://www.shorelinelake.com" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Shoreline%20Lake%20%26%20Park%203160%20N%20Shoreline%20Blvd%2C%20Mountain%20View%2C%20CA%2094043" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-nature"><img class="pphoto" src="img/places/elizabeth-f-gamble-garden.jpg" alt="Elizabeth F. Gamble Garden" loading="lazy"><h5>Elizabeth F. Gamble Garden</h5><div class="loc">Palo Alto · ~6 mi</div><p class="why">A free historic garden with winding paths and a working greenhouse. Small and calm, with lots of flowers to name and smell.</p><div class="paddr">📍 1431 Waverley St, Palo Alto, CA 94301</div><div class="plinks"><a href="https://www.gamblegarden.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Elizabeth%20F.%20Gamble%20Garden%201431%20Waverley%20St%2C%20Palo%20Alto%2C%20CA%2094301" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-nature"><img class="pphoto" src="img/places/baylands-nature-preserve.jpg" alt="Baylands Nature Preserve" loading="lazy"><h5>Baylands Nature Preserve</h5><div class="loc">Palo Alto · ~8 mi</div><p class="why">A long flat boardwalk over the marsh, great for spotting birds from the stroller. Windy in the afternoon, so mornings are best.</p><div class="paddr">📍 2500 Embarcadero Rd, Palo Alto, CA 94303</div><div class="plinks"><a href="https://www.cityofpaloalto.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Baylands%20Nature%20Preserve%202500%20Embarcadero%20Rd%2C%20Palo%20Alto%2C%20CA%2094303" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-nature"><img class="pphoto" src="img/places/hakone-estate-and-gardens.jpg" alt="Hakone Estate and Gardens" loading="lazy"><h5>Hakone Estate and Gardens</h5><div class="loc">Saratoga · ~12 mi</div><p class="why">A serene Japanese garden with koi ponds and arched bridges. Slower-paced, but toddlers love the fish and the stepping stones.</p><div class="paddr">📍 21000 Big Basin Way, Saratoga, CA 95070</div><div class="plinks"><a href="https://www.hakone.com" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Hakone%20Estate%20and%20Gardens%2021000%20Big%20Basin%20Way%2C%20Saratoga%2C%20CA%2095070" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-nature"><img class="pphoto" src="img/places/filoli-historic-house-garden.jpg" alt="Filoli Historic House &amp; Garden" loading="lazy"><h5>Filoli Historic House &amp; Garden</h5><div class="loc">Woodside · ~13 mi</div><p class="why">Grand formal gardens with fountains and wide gravel paths. A nature-play area for kids and seasonal events; strollers welcome outdoors.</p><div class="paddr">📍 86 Canada Rd, Woodside, CA 94062</div><div class="plinks"><a href="https://filoli.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Filoli%20Historic%20House%20%26%20Garden%2086%20Canada%20Rd%2C%20Woodside%2C%20CA%2094062" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-nature"><img class="pphoto" src="img/places/sanborn-county-park.jpg" alt="Sanborn County Park" loading="lazy"><h5>Sanborn County Park</h5><div class="loc">Saratoga · ~14 mi</div><p class="why">Towering redwoods and picnic meadows, with a short accessible nature trail. Cool shade on hot valley days, so pack a light layer.</p><div class="paddr">📍 16055 Sanborn Rd, Saratoga, CA 95070</div><div class="plinks"><a href="https://parks.santaclaracounty.gov/locations/sanborn-county-park" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Sanborn%20County%20Park%2016055%20Sanborn%20Rd%2C%20Saratoga%2C%20CA%2095070" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+    </div>
+
+    <div class="place-cat"><span class="em">🦁</span>Animals, Zoos &amp; Aquariums</div>
+    <p class="place-sub">Petting animals and small zoos, plus pony rides. A big hit at this age.</p>
+    <div class="places">
+      <div class="place p-zoo"><img class="pphoto" src="img/places/palo-alto-junior-museum-zoo.jpg" alt="Palo Alto Junior Museum &amp; Zoo" loading="lazy"><h5>Palo Alto Junior Museum &amp; Zoo</h5><div class="loc">Palo Alto · ~7 mi</div><p class="why">A recently rebuilt toddler-scaled museum and zoo. Meerkats and a two-story climbing structure inside. One of the best local picks for this age.</p><div class="paddr">📍 1451 Middlefield Rd, Palo Alto, CA 94301</div><div class="plinks"><a href="https://www.friendsjmz.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Palo%20Alto%20Junior%20Museum%20%26%20Zoo%201451%20Middlefield%20Rd%2C%20Palo%20Alto%2C%20CA%2094301" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-zoo"><img class="pphoto" src="img/places/webb-ranch.jpg" alt="Webb Ranch" loading="lazy"><h5>Webb Ranch</h5><div class="loc">Portola Valley · ~8 mi</div><p class="why">Pony rides and a small farm-animal zoo, plus a seasonal pumpkin patch and produce stand. Tucked at the base of the foothills.</p><div class="paddr">📍 2720 Alpine Rd, Portola Valley, CA 94028</div><div class="plinks"><a href="https://webbranchinc.com" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Webb%20Ranch%202720%20Alpine%20Rd%2C%20Portola%20Valley%2C%20CA%2094028" target="_blank" rel="noopener">Map</a></div><span class="age">Ana leads</span></div>
+      <div class="place p-zoo"><img class="pphoto" src="img/places/happy-hollow-park-zoo.jpg" alt="Happy Hollow Park &amp; Zoo" loading="lazy"><h5>Happy Hollow Park &amp; Zoo</h5><div class="loc">San Jose · ~15 mi</div><p class="why">Built for little ones, with a small zoo and a carousel. Gentle toddler rides and a puppet theater make it a whole-morning favorite.</p><div class="paddr">📍 748 Story Rd, San Jose, CA 95112</div><div class="plinks"><a href="https://happyhollow.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Happy%20Hollow%20Park%20%26%20Zoo%20748%20Story%20Rd%2C%20San%20Jose%2C%20CA%2095112" target="_blank" rel="noopener">Map</a></div><span class="age">Ana leads</span></div>
+      <div class="place p-zoo"><img class="pphoto" src="img/places/curiodyssey.jpg" alt="CuriOdyssey" loading="lazy"><h5>CuriOdyssey</h5><div class="loc">San Mateo · ~17 mi</div><p class="why">Hands-on science plus a wildlife zoo of rescued animals like foxes and owls, on bayfront Coyote Point. Lots to touch and explore for small hands.</p><div class="paddr">📍 1651 Coyote Point Dr, San Mateo, CA 94401</div><div class="plinks"><a href="https://curiodyssey.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=CuriOdyssey%201651%20Coyote%20Point%20Dr%2C%20San%20Mateo%2C%20CA%2094401" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-zoo"><img class="pphoto" src="img/places/lemos-farm.jpg" alt="Lemos Farm" loading="lazy"><h5>Lemos Farm</h5><div class="loc">Half Moon Bay · ~22 mi</div><p class="why">A working farm turned family destination. Pony rides and a mini train are the draw. A hay ride and a petting zoo run in fall pumpkin season.</p><div class="paddr">📍 12320 San Mateo Rd, Half Moon Bay, CA 94019</div><div class="plinks"><a href="https://www.lemosfarm.com" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Lemos%20Farm%2012320%20San%20Mateo%20Rd%2C%20Half%20Moon%20Bay%2C%20CA%2094019" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+    </div>
+
+    <div class="place-cat"><span class="em">🏛️</span>Museums &amp; Indoor Play</div>
+    <p class="place-sub">Hands-on and indoors for when the weather turns.</p>
+    <div class="places">
+      <div class="place p-trip"><img class="pphoto" src="img/places/hiller-aviation-museum.jpg" alt="Hiller Aviation Museum" loading="lazy"><h5>Hiller Aviation Museum</h5><div class="loc">San Carlos · ~12 mi</div><p class="why">Real planes and helicopters to look at, with a walk-in aircraft cabin and a play area. Little ones love the sheer size of everything.</p><div class="paddr">📍 601 Skyway Rd, San Carlos, CA 94070</div><div class="plinks"><a href="https://www.hiller.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Hiller%20Aviation%20Museum%20601%20Skyway%20Rd%2C%20San%20Carlos%2C%20CA%2094070" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-trip"><img class="pphoto" src="img/places/children-s-discovery-museum-of-san-jose.jpg" alt="Children's Discovery Museum of San Jose" loading="lazy"><h5>Children's Discovery Museum of San Jose</h5><div class="loc">San Jose · ~15 mi</div><p class="why">A huge purple museum with a 'Wonder Cabinet' area for under-fours. Water play and a bubble room, plus a real fire truck to climb.</p><div class="paddr">📍 180 Woz Way, San Jose, CA 95110</div><div class="plinks"><a href="https://www.cdm.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Children%27s%20Discovery%20Museum%20of%20San%20Jose%20180%20Woz%20Way%2C%20San%20Jose%2C%20CA%2095110" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-trip"><img class="pphoto" src="img/places/the-tech-interactive.jpg" alt="The Tech Interactive" loading="lazy"><h5>The Tech Interactive</h5><div class="loc">San Jose · ~16 mi</div><p class="why">Hands-on science and tech galleries. Best for older kids, but the ground-floor exhibits give toddlers plenty to touch on a rainy day.</p><div class="paddr">📍 201 S Market St, San Jose, CA 95113</div><div class="plinks"><a href="https://www.thetech.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=The%20Tech%20Interactive%20201%20S%20Market%20St%2C%20San%20Jose%2C%20CA%2095113" target="_blank" rel="noopener">Map</a></div><span class="age">Ana leads</span></div>
+      <div class="place p-trip"><img class="pphoto" src="img/places/bay-area-discovery-museum.jpg" alt="Bay Area Discovery Museum" loading="lazy"><h5>Bay Area Discovery Museum</h5><div class="loc">Sausalito · ~40 mi</div><p class="why">An indoor-outdoor museum under the Golden Gate Bridge, built for ages 0-8. A dedicated 'Tot Spot' for the youngest, plus a fishing boat and sea tunnels.</p><div class="paddr">📍 557 McReynolds Rd, Sausalito, CA 94965</div><div class="plinks"><a href="https://bayareadiscoverymuseum.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Bay%20Area%20Discovery%20Museum%20557%20McReynolds%20Rd%2C%20Sausalito%2C%20CA%2094965" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+    </div>
+
+    <div class="place-cat"><span class="em">🚂</span>Trains, Rides &amp; Theme Parks</div>
+    <p class="place-sub">A little train or a carousel is pure magic for a two-year-old.</p>
+    <div class="places">
+      <div class="place p-train"><img class="pphoto" src="img/places/billy-jones-wildcat-railroad-oak-meadow-.jpg" alt="Billy Jones Wildcat Railroad (Oak Meadow Park)" loading="lazy"><h5>Billy Jones Wildcat Railroad (Oak Meadow Park)</h5><div class="loc">Los Gatos · ~13 mi</div><p class="why">A beloved miniature steam train and a restored carousel, set in a shady playground park. Cheap tickets and short lines make it a classic toddler outing.</p><div class="paddr">📍 233 Blossom Hill Rd, Los Gatos, CA 95032</div><div class="plinks"><a href="https://www.bjwrr.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Billy%20Jones%20Wildcat%20Railroad%20%28Oak%20Meadow%20Park%29%20233%20Blossom%20Hill%20Rd%2C%20Los%20Gatos%2C%20CA%2095032" target="_blank" rel="noopener">Map</a></div><span class="age">Ana leads</span></div>
+      <div class="place p-train"><img class="pphoto" src="img/places/gilroy-gardens-family-theme-park.jpg" alt="Gilroy Gardens Family Theme Park" loading="lazy"><h5>Gilroy Gardens Family Theme Park</h5><div class="loc">Gilroy · ~35 mi</div><p class="why">A gentle garden theme park with kid-sized rides and a splash area. Slower and greener than a big amusement park, so it suits toddlers.</p><div class="paddr">📍 3050 Hecker Pass Hwy, Gilroy, CA 95020</div><div class="plinks"><a href="https://www.gilroygardens.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Gilroy%20Gardens%20Family%20Theme%20Park%203050%20Hecker%20Pass%20Hwy%2C%20Gilroy%2C%20CA%2095020" target="_blank" rel="noopener">Map</a></div><span class="age">Ana leads</span></div>
+    </div>
+
+    <div class="place-cat"><span class="em">🏖️</span>Beaches &amp; Coast</div>
+    <p class="place-sub">Sand play suits every age. Keep the baby shaded and go for the morning.</p>
+    <div class="places">
+      <div class="place p-beach"><img class="pphoto" src="img/places/half-moon-bay-state-beach.jpg" alt="Half Moon Bay State Beach" loading="lazy"><h5>Half Moon Bay State Beach</h5><div class="loc">Half Moon Bay · ~20 mi</div><p class="why">A wide sandy beach with a flat paved coastal trail behind it for strollers. Cool and often foggy. Bring layers and a bucket for the sand.</p><div class="paddr">📍 95 Kelly Ave, Half Moon Bay, CA 94019</div><div class="plinks"><a href="https://www.parks.ca.gov/?page_id=531" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Half%20Moon%20Bay%20State%20Beach%2095%20Kelly%20Ave%2C%20Half%20Moon%20Bay%2C%20CA%2094019" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-beach"><img class="pphoto" src="img/places/santa-cruz-beach-boardwalk.jpg" alt="Santa Cruz Beach Boardwalk" loading="lazy"><h5>Santa Cruz Beach Boardwalk</h5><div class="loc">Santa Cruz · ~35 mi</div><p class="why">A classic seaside boardwalk with a Kiddie Zone of tot-height rides, and the beach right there. Free admission; pay per ride or by wristband.</p><div class="paddr">📍 400 Beach St, Santa Cruz, CA 95060</div><div class="plinks"><a href="https://beachboardwalk.com" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Santa%20Cruz%20Beach%20Boardwalk%20400%20Beach%20St%2C%20Santa%20Cruz%2C%20CA%2095060" target="_blank" rel="noopener">Map</a></div><span class="age">Ana leads</span></div>
+      <div class="place p-beach"><img class="pphoto" src="img/places/natural-bridges-state-beach.jpg" alt="Natural Bridges State Beach" loading="lazy"><h5>Natural Bridges State Beach</h5><div class="loc">Santa Cruz · ~37 mi</div><p class="why">Calm tide pools at low tide and a sandy cove, plus winter monarch butterflies on the boardwalk. Check the tide chart before you go.</p><div class="paddr">📍 2531 W Cliff Dr, Santa Cruz, CA 95060</div><div class="plinks"><a href="https://www.parks.ca.gov/?page_id=541" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Natural%20Bridges%20State%20Beach%202531%20W%20Cliff%20Dr%2C%20Santa%20Cruz%2C%20CA%2095060" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
+      <div class="place p-beach"><img class="pphoto" src="img/places/capitola-village-beach.jpg" alt="Capitola Village &amp; Beach" loading="lazy"><h5>Capitola Village &amp; Beach</h5><div class="loc">Capitola · ~38 mi</div><p class="why">A colorful, sheltered beach town with calm water and easy sand. Ice cream is a few steps away, and it is the gentlest beach for small kids.</p><div class="paddr">📍 Esplanade, Capitola, CA 95010</div><div class="plinks"><a href="https://www.cityofcapitola.org" target="_blank" rel="noopener">Website</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Capitola%20Village%20%26%20Beach%20Esplanade%2C%20Capitola%2C%20CA%2095010" target="_blank" rel="noopener">Map</a></div><span class="age">Both</span></div>
     </div>
   </section>
 
@@ -321,51 +494,89 @@
   const ana=[
     ["7:30","AM","care","Wake &amp; cuddle","Open curtains, sing the good-morning song, slow start to the day. 12h after a 7:30 pm bedtime."],
     ["8:00","AM","feed","Breakfast","Whole grain + fruit + protein (egg or yogurt) + milk."],
-    ["8:15","AM","play","Free / independent play","Blocks, cars, dolls, child-led — let her lead."],
+    ["8:15","AM","play","Free / independent play","Blocks, cars, dolls, child-led, let her lead."],
     ["9:00","AM","learn","Learning time","Books, colors &amp; shapes, simple puzzles, songs."],
     ["9:45","AM","play","Outdoor active play","Run, climb, balls, gross motor + sunshine."],
     ["10:30","AM","feed","Morning snack","Fruit + cheese or whole-grain crackers; water."],
     ["11:00","AM","learn","Creative / sensory","Playdough, crayons, water or sand play."],
     ["11:45","AM","feed","Lunch","Veg + protein + grain; iron food with vitamin C."],
-    ["12:30","PM","sleep","Nap (~2h) · 12:30-2:30","A solid 2-hour midday nap — the daytime half of the ~14h total. Dark, quiet room."],
+    ["12:30","PM","sleep","Nap (~2h) · 12:30-2:30","A solid 2-hour midday nap, the daytime half of the ~14h total. Dark, quiet room."],
     ["2:30","PM","feed","Afternoon snack","After waking: fruit &amp; protein; milk or water."],
-    ["3:00","PM","play","Pretend &amp; building play","Kitchen, dress-up, stacking — imagination time."],
+    ["3:00","PM","play","Pretend &amp; building play","Kitchen, dress-up, stacking, imagination time."],
     ["3:45","PM","play","Park / outdoor time","Big-muscle play, ride-on toys, nature."],
     ["4:30","PM","learn","Music &amp; movement","Dance, action songs, counting games."],
     ["5:00","PM","play","Quiet free play","Wind the activity level down gently."],
     ["5:30","PM","feed","Dinner","Family-style small portions; offer variety."],
-    ["6:00","PM","care","Family &amp; calm play","Puzzles, reading, connection time — nothing stimulating."],
+    ["6:00","PM","care","Family &amp; calm play","Puzzles, reading, connection time, nothing stimulating."],
     ["6:45","PM","care","Bath &amp; pajamas","Warm bath + dim lights start the wind-down routine."],
-    ["7:00","PM","learn","Bedtime books &amp; cool-down","2-3 stories, dim lights, cuddles — the calm cool-down before sleep."],
+    ["7:00","PM","learn","Bedtime books &amp; cool-down","2-3 stories, dim lights, cuddles, the calm cool-down before sleep."],
     ["7:30","PM","sleep","Bedtime","Lights out / asleep ~7:30. ~12h night + 2h nap = 14h total minimum."]
   ];
-  // School's own fixed schedule (summarized from the school's note) — grayed out, out of our control.
+  // School's own fixed schedule (summarized from the school's note), grayed out, out of our control.
   const anaFixed=[
     ["8:45","AM","school","Arrival &amp; settle in","Drop-off and free play in the classroom before the structured day begins."],
     ["9:50","AM","school","Snack, Circle Time &amp; Discovery","Wash hands and snack, then themed Discovery play. Circle Time with dancing, songs, puppets &amp; stories. Bathroom/diaper checks with teachers."],
     ["11:00","AM","school","Outdoor Exploration Play","Outside in the Courtyard and Tree house."],
-    ["11:30","AM","school","Lunch (packed from home)","Wash hands, collect lunch, eat with teachers &amp; friends. No microwave — pack an ice pack or thermos. Stories while eating."],
+    ["11:30","AM","school","Lunch (packed from home)","Wash hands, collect lunch, eat with teachers &amp; friends. No microwave, pack an ice pack or thermos. Stories while eating."],
     ["12:10","PM","school","Stories &amp; finish lunch","Stories while everyone finishes; gather water bottle and home items in the courtyard."],
     ["12:30","PM","school","Clean-up &amp; dismissal prep","Clean-up play 12:30-12:40, then wash hands in the tree-house/water-play area. (Half-day pickup ~12:45-1:00.)"],
-    ["1:00","PM","school","Nap / Rest Time","1:00-3:00 — rest on cots with books, music &amp; stories. This is the fixed nap the home plan is built around."],
+    ["1:00","PM","school","Nap / Rest Time","1:00-3:00, rest on cots with books, music &amp; stories. This is the fixed nap the home plan is built around."],
     ["3:15","PM","school","Afternoon snack (from home) &amp; Discovery","Snack from home, refill water bottles, wash hands, then begin classroom Discovery."],
     ["3:45","PM","school","Discovery &amp; clean-up","3:45-4:30 classroom Discovery and clean-up; free play until ~5:00 pickup."]
   ];
   // Proposed home rhythm tuned around the fixed school day to reach ~14h total sleep.
   const anaPlan=[
     ["6:45","AM","care","Wake &amp; cuddle","Wake her by ~6:45 so an early bedtime works. Open curtains, dress, brush teeth."],
-    ["7:00","AM","feed","Hearty breakfast at home","Whole grain + fruit + protein (egg/yogurt) + milk — school snack isn't until 9:50."],
+    ["7:00","AM","feed","Hearty breakfast at home","Whole grain + fruit + protein (egg/yogurt) + milk, school snack isn't until 9:50."],
     ["7:45","AM","play","Free play &amp; pack up","Calm play; pack bag, water bottle, ice-pack lunch + a from-home afternoon snack."],
     ["8:20","AM","care","Drive to school","~15 min drive; songs and chatting on the way."],
-    ["8:45","AM","learn","Drop-off — school day begins","See the school's own schedule above. Warm, quick goodbye."],
-    ["1:00","PM","sleep","School nap · 1:00-3:00 (fixed)","The 2-hour school rest — the anchor of the whole plan. Ask staff to keep it full and consistent."],
+    ["8:45","AM","learn","Drop-off, school day begins","See the school's own schedule above. Warm, quick goodbye."],
+    ["1:00","PM","sleep","School nap · 1:00-3:00 (fixed)","The 2-hour school rest, the anchor of the whole plan. Ask staff to keep it full and consistent."],
     ["5:00","PM","care","Pickup","Warm reunion; let her decompress and tell you about her day."],
     ["5:15","PM","care","Home","Wash hands, quiet reconnection; a small light snack only if truly hungry."],
     ["5:45","PM","feed","Early dinner","Serve early so bedtime stays early. Balanced small portions + water; keep it calm."],
-    ["6:15","PM","play","Quiet connection play","Low-key only: puzzles, blocks, reading — nothing stimulating before bed."],
+    ["6:15","PM","play","Quiet connection play","Low-key only: puzzles, blocks, reading, nothing stimulating before bed."],
     ["6:45","PM","care","Bath &amp; pajamas","Warm bath + dim lights signal wind-down."],
-    ["7:00","PM","learn","Bedtime books &amp; cool-down","2-3 short stories, cuddles, dim room — the calm cool-down before sleep."],
-    ["7:30","PM","sleep","Lights out — 7:30 pm","Same bedtime as home days. ~11.25h night + 2h school nap ≈ 13.5h total."]
+    ["7:00","PM","learn","Bedtime books &amp; cool-down","2-3 short stories, cuddles, dim room, the calm cool-down before sleep."],
+    ["7:30","PM","sleep","Lights out, 7:30 pm","Same bedtime as home days. ~11.25h night + 2h school nap ≈ 13.5h total."]
+  ];
+
+  // Weekend: both home. Sleep anchors identical to weekdays; mornings built around an outing.
+  const aydinWeekend=[
+    ["6:30","AM","feed","Wake + morning milk","Nurse or bottle to start the day."],
+    ["7:15","AM","feed","Breakfast solids","Iron-rich meal before you head out: fortified cereal, egg, or soft fruit."],
+    ["8:15","AM","play","Head out with the family","Stroller or carrier to a park, farm, or the farmers market in his first wake window."],
+    ["8:30","AM","sleep","Nap 1 on the go (~1.5h)","A stroller or carrier nap is fine while you are out. Shade, sun hat, quiet."],
+    ["10:15","AM","feed","Milk feed","Full nurse or bottle after waking, wherever you are."],
+    ["10:45","AM","play","Blanket &amp; sensory play","Shaded blanket time watching his sister; safe things to hold and mouth."],
+    ["11:45","AM","feed","Lunch solids + milk","Veg or protein puree/finger food, then milk. Head home if you are still out."],
+    ["12:15","PM","sleep","Nap 2 (~1.75h) · at home","The nap to bring home to the crib. Lines up with Ana's nap, so both sleep at once."],
+    ["2:00","PM","feed","Milk feed","Rehydrate and refuel."],
+    ["2:30","PM","play","Backyard / floor play","Textures, teethers, cause-and-effect toys close to home."],
+    ["3:30","PM","sleep","Nap 3 (~1h)","A short third nap. A car or stroller nap works if you slip out again."],
+    ["4:30","PM","feed","Milk feed","Afternoon top-up."],
+    ["5:00","PM","play","Evening walk / play","Fresh air; stacking cups and rattles to bang and drop."],
+    ["5:45","PM","feed","Dinner solids","Small iron-rich meal with the family."],
+    ["6:15","PM","care","Bath, massage &amp; book","Calm, dim lights signal that sleep is coming."],
+    ["6:45","PM","sleep","Bedtime milk + bed","Down for the night ~6:45. Same as any day; naps ~4.5h + night ≈ 16h."]
+  ];
+  const anaWeekend=[
+    ["7:30","AM","care","Wake &amp; cuddle","Open curtains, slow start. 12h after a 7:30 pm bedtime."],
+    ["8:00","AM","feed","Breakfast","Whole grain + fruit + protein (egg or yogurt) + milk. Fuel for the outing."],
+    ["8:30","AM","care","Get ready &amp; pack up","Sunscreen, hats, water, snacks. Load the stroller and go while she is fresh."],
+    ["9:00","AM","play","Morning outing","Park, farm, playground, or beach. Big-muscle play is best now, before the nap. See the Places tab."],
+    ["11:00","AM","care","Head home","Wind down on the drive so she is ready to eat and rest."],
+    ["11:45","AM","feed","Lunch at home","Veg + protein + grain; iron food with vitamin C. Keep it calm before nap."],
+    ["12:30","PM","sleep","Nap (~2h) · 12:30-2:30","The protected midday nap, in her own bed. Plan the outing to end before it."],
+    ["2:30","PM","feed","Afternoon snack","After waking: fruit &amp; protein; milk or water."],
+    ["3:00","PM","play","Backyard / relaxed play","Water table, sandbox, ride-on toys, or a short walk close to home."],
+    ["4:00","PM","learn","Creative / quiet time","Playdough, crayons, books, or a little co-viewing if the day was long."],
+    ["4:45","PM","play","Family free play","Low-key together time as the day winds down."],
+    ["5:30","PM","feed","Dinner","Family-style small portions; offer variety."],
+    ["6:00","PM","care","Calm connection play","Puzzles, reading, cuddles. Nothing stimulating before bed."],
+    ["6:45","PM","care","Bath &amp; pajamas","Warm bath + dim lights start the wind-down."],
+    ["7:00","PM","learn","Bedtime books &amp; cool-down","2-3 stories, dim lights, cuddles."],
+    ["7:30","PM","sleep","Bedtime","Lights out ~7:30, same as home days. ~12h night + 2h nap = 14h."]
   ];
 
   function renderLegend(id,types){
@@ -386,8 +597,10 @@
   }
   renderLegend("legend-aydin");renderLegend("legend-ana");
   renderLegend("legend-ana-fixed",["school"]);renderLegend("legend-ana-plan");
+  renderLegend("legend-wk-aydin");renderLegend("legend-wk-ana");
   render("tl-aydin",aydin);render("tl-ana",ana);
   render("tl-ana-fixed",anaFixed);render("tl-ana-plan",anaPlan);
+  render("tl-wk-aydin",aydinWeekend);render("tl-wk-ana",anaWeekend);
   document.querySelectorAll(".tab").forEach(t=>{
     t.addEventListener("click",()=>{
       document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
